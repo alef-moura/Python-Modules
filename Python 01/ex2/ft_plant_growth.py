@@ -1,8 +1,8 @@
 class Plant:
     def __init__(self, name: str, height: float, age: int) -> None:
-        self.name: str = name
-        self.height: float = height
-        self.age: int = age
+        self.name = name
+        self.height = height
+        self.age = age
 
     def grow(self, amount: float = 0.8) -> None:
         self.height += amount
@@ -11,7 +11,7 @@ class Plant:
         self.age += 1
 
     def show(self) -> None:
-        print(f"{self.name}: {aroun(self.height:1)}cm, {self.age} days old")
+        print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
 
 
 if __name__ == "__main__":

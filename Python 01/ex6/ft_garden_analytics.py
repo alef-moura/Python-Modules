@@ -9,9 +9,9 @@ class Plant:
             print(f"Stats: {self.grow_calls} grow, {self.age_calls} age, {self.show_calls} show")
 
     def __init__(self, name: str, height: float, age: int) -> None:
-        self.name: str = name
-        self.height: float = height
-        self.age: int = age
+        self.name = name
+        self.height = height
+        self.age = age
         self.stats = self.Stats()
 
     def grow(self, amount: float) -> None:
