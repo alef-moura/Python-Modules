@@ -3,7 +3,10 @@ class Plant:
         self.name = name
         self.height = height
         self.age = age
-        print(f"Created: {self.name}: {round(self.height, 1)}cm, {self.age} day old")
+        print(
+            f"Created: {self.name}: "
+            f"{round(self.height, 1)}cm, {self.age} day old"
+        )
 
 
 if __name__ == "__main__":

@@ -6,7 +6,10 @@ class Plant:
             self.show_calls: int = 0
 
         def display(self) -> None:
-            print(f"Stats: {self.grow_calls} grow, {self.age_calls} age, {self.show_calls} show")
+            print(
+                f"Stats: {self.grow_calls} grow, "
+                f"{self.age_calls} age, {self.show_calls} show"
+            )
 
     def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name
@@ -60,17 +63,26 @@ class Tree(Plant):
             self.shade_calls: int = 0
 
         def display(self) -> None:
-            print(f"Stats: {self.grow_calls} grow, {self.age_calls} age, {self.show_calls} show")
+            print(
+                f"Stats: {self.grow_calls} grow, "
+                f"{self.age_calls} age, {self.show_calls} show"
+            )
             print(f"{self.shade_calls} shade")
 
-    def __init__(self, name: str, height: float, age: int, trunk_diameter: float) -> None:
+    def __init__(
+        self, name: str, height: float, age: int, trunk_diameter: float
+    ) -> None:
         super().__init__(name, height, age)
         self.trunk_diameter: float = trunk_diameter
-        self.stats = self.TreeStats()
+        self.stats: Tree.TreeStats = self.TreeStats()
 
     def produce_shade(self) -> None:
         self.stats.shade_calls += 1
-        print(f"Tree {self.name} now produces a shade of {round(self.height, 1)}cm long and {round(self.trunk_diameter, 1)}cm wide.")
+        print(
+            f"Tree {self.name} now produces a shade of "
+            f"{round(self.height, 1)}cm long and "
+            f"{round(self.trunk_diameter, 1)}cm wide."
+        )
 
     def show(self) -> None:
         super().show()
