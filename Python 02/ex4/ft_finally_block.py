@@ -14,6 +14,7 @@ def water_plant(plant_name: str) -> None:
 
 def test_watering_system() -> None:
     print("=== Garden Watering System ===")
+    print()
 
     print("Testing valid plants...")
     print("Opening watering system")
@@ -22,6 +23,7 @@ def test_watering_system() -> None:
             water_plant(p)
     finally:
         print("Closing watering system")
+        print()
 
     print("\nTesting invalid plants...")
     print("Opening watering system")
@@ -30,10 +32,11 @@ def test_watering_system() -> None:
             water_plant(p)
     except PlantError as e:
         print(f"Caught PlantError: {e}")
-        print("ending tests and returning to main")
+        print(".. ending tests and returning to main")
     finally:
         print("Closing watering system")
 
+    print()
     print("Cleanup always happens, even with errors!")
 
 

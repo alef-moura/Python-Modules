@@ -25,6 +25,7 @@ def test_error_types() -> None:
         except TypeError as e:
             print(f"Caught TypeError: {e}")
 
+    print()
     print("All error types tested successfully!")
 
 
