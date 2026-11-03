@@ -32,7 +32,6 @@ class AlienContact(BaseModel):
 
     @model_validator(mode="after")
     def check_business_rules(self) -> "AlienContact":
-        # Roda DEPOIS da validacao dos campos: regras que envolvem varios
         if not self.contact_id.startswith("AC"):
             raise ValueError("Contact ID must start with 'AC'")
         if (self.contact_type == ContactType.PHYSICAL
@@ -61,7 +60,6 @@ def show_contact(contact: AlienContact) -> None:
 
 def first_error(error: ValidationError) -> str:
     msg = str(error.errors()[0]["msg"])
-    # Mensagens de model_validator vem com o prefixo "Value error, "
     return msg.removeprefix("Value error, ")
 
 

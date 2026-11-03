@@ -34,7 +34,6 @@ class SpaceMission(BaseModel):
     destination: str = Field(min_length=3, max_length=50)
     launch_date: datetime
     duration_days: int = Field(ge=1, le=3650)
-    # Modelo aninhado: cada item da lista e validado como CrewMember
     crew: list[CrewMember] = Field(min_length=1, max_length=12)
     mission_status: str = "planned"
     budget_millions: float = Field(ge=1.0, le=10000.0)
@@ -122,7 +121,6 @@ def main() -> None:
         {"mission_id": "X2024_MARS"},
         {"crew": [dict(m, years_experience=1) for m in crew]},
         {"crew": crew[:2] + [dict(crew[2], is_active=False)]},
-        # Erro dentro de um modelo aninhado (idade invalida)
         {"crew": crew[:2] + [dict(crew[2], age=12)]},
     ]
     for case in invalid_cases:

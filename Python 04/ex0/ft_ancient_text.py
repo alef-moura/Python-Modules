@@ -11,7 +11,6 @@ def main() -> None:
     print("=== Cyber Archives Recovery ===")
     print(f"Accessing file '{filename}'")
     try:
-        # open() devolve um objeto de arquivo (io.TextIOWrapper)
         file: typing.IO[str] = open(filename, "r")
     except OSError as error:
         print(f"Error opening file '{filename}': {error}")
@@ -21,7 +20,7 @@ def main() -> None:
     except (OSError, UnicodeDecodeError) as error:
         print(f"Error reading file '{filename}': {error}")
         content = ""
-    file.close()  # sem 'with', precisamos fechar manualmente
+    file.close()
     print("---")
     print(content, end="")
     print("---")

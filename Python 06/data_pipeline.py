@@ -37,7 +37,6 @@ class DataProcessor(ABC):
 
 
 def _is_number(value: Any) -> bool:
-    # bool e subclasse de int em Python, por isso excluimos explicitamente
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
 

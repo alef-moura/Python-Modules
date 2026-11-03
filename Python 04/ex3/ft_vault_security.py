@@ -10,7 +10,6 @@ def secure_archive(filename: str, action: str = "read",
     """
     try:
         if action == "read":
-            # 'with' fecha o arquivo automaticamente, mesmo se houver erro
             with open(filename, "r") as file:
                 return (True, file.read())
         if action == "write":

@@ -10,7 +10,6 @@ def battle(opponents: list[tuple[CreatureFactory, BattleStrategy]]) -> None:
     print("*** Tournament ***")
     print(f"{len(fighters)} opponents involved")
     try:
-        # Cada oponente enfrenta cada outro exatamente uma vez (i < j)
         for i in range(len(fighters)):
             for j in range(i + 1, len(fighters)):
                 first, first_strategy = fighters[i]

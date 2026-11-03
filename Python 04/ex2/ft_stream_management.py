@@ -4,7 +4,6 @@ import typing
 
 
 def error(message: str) -> None:
-    # stderr: canal separado para erros (pode ser redirecionado com 2>)
     sys.stdout.flush()
     sys.stderr.write(f"[STDERR] {message}\n")
     sys.stderr.flush()
@@ -57,7 +56,6 @@ def save_file(filename: str, content: str) -> None:
 
 
 def ask(prompt: str) -> str:
-    # Equivalente ao input(): escreve em stdout e le uma linha de stdin
     sys.stdout.write(prompt)
     sys.stdout.flush()
     return sys.stdin.readline().rstrip("\n")

@@ -46,7 +46,6 @@ def load_json(name: str) -> list[dict[str, Any]]:
 def main() -> None:
     print("Space Station Data Validation")
     print("=" * 40)
-    # A string ISO e convertida automaticamente para datetime
     station = SpaceStation(
         station_id="ISS001",
         name="International Space Station",
@@ -78,7 +77,6 @@ def main() -> None:
         print("=" * 40)
         print(f"Validating {len(generated)} generated stations:")
         for raw in generated:
-            # model_validate cria o modelo a partir de um dicionario
             item = SpaceStation.model_validate(raw)
             print(f"  [OK] {item.station_id}: {item.name}")
 

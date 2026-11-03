@@ -3,7 +3,6 @@ import importlib
 import sys
 from types import ModuleType
 
-# nome do pacote -> descricao exibida
 REAGENTS = {
     "pandas": "Data manipulation ready",
     "numpy": "Numerical computation ready",
@@ -12,7 +11,6 @@ REAGENTS = {
 
 def load(name: str) -> ModuleType | None:
     try:
-        # importlib permite importar um modulo a partir de uma string
         return importlib.import_module(name)
     except ImportError:
         return None
@@ -50,7 +48,6 @@ def main() -> None:
         print("  poetry run python loading.py")
         return
 
-    # Uso real dos dois reagentes juntos
     numpy = load("numpy")
     pandas = load("pandas")
     if numpy is not None and pandas is not None:

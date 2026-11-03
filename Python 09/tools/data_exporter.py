@@ -34,13 +34,11 @@ class DataExporter:
         
         filepath = self.output_dir / f"{filename}.csv"
         
-        # Handle nested data by flattening
         flat_data = []
         for item in data:
             flat_item = self._flatten_dict(item)
             flat_data.append(flat_item)
         
-        # Get all unique keys for CSV headers
         all_keys = set()
         for item in flat_data:
             all_keys.update(item.keys())
@@ -58,7 +56,6 @@ class DataExporter:
         
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(f'"""\nGenerated test data for {filename}\n"""\n\n')
-            # Use repr() to get proper Python syntax instead of JSON
             f.write(f'{variable_name} = {self._format_python_data(data)}\n')
         
         return filepath
@@ -75,7 +72,6 @@ class DataExporter:
         elif isinstance(data, (int, float)):
             return str(data)
         elif isinstance(data, str):
-            # Escape quotes and format as Python string
             return repr(data)
         elif isinstance(data, list):
             if not data:
@@ -106,14 +102,12 @@ class DataExporter:
             if isinstance(v, dict):
                 items.extend(self._flatten_dict(v, new_key, sep=sep).items())
             elif isinstance(v, list) and v and isinstance(v[0], dict):
-                # Handle list of dictionaries by creating numbered entries
                 for i, item in enumerate(v):
                     if isinstance(item, dict):
                         items.extend(self._flatten_dict(item, f"{new_key}_{i}", sep=sep).items())
                     else:
                         items.append((f"{new_key}_{i}", item))
             elif isinstance(v, list):
-                # Simple list - join as string
                 items.append((new_key, ', '.join(map(str, v))))
             else:
                 items.append((new_key, v))
@@ -128,19 +122,15 @@ def generate_all_datasets():
     
     print("🔄 Generating complete datasets...")
     
-    # Generate space station data
     station_gen = SpaceStationGenerator(config)
     stations = station_gen.generate_station_data(10)
     
-    # Generate alien contact data
     contact_gen = AlienContactGenerator(config)
     contacts = contact_gen.generate_contact_data(15)
     
-    # Generate mission data
     mission_gen = CrewMissionGenerator(config)
     missions = mission_gen.generate_mission_data(5)
     
-    # Export in multiple formats
     datasets = [
         (stations, "space_stations", "SPACE_STATIONS"),
         (contacts, "alien_contacts", "ALIEN_CONTACTS"),
@@ -150,16 +140,13 @@ def generate_all_datasets():
     exported_files = []
     
     for data, filename, var_name in datasets:
-        # Export to JSON
         json_file = exporter.export_to_json(data, filename)
         exported_files.append(json_file)
         
-        # Export to Python
         py_file = exporter.export_to_python(data, filename, var_name)
         exported_files.append(py_file)
         
-        # Export to CSV (only for non-nested data)
-        if filename != "space_missions":  # Missions have nested crew data
+        if filename != "space_missions":
             csv_file = exporter.export_to_csv(data, filename)
             if csv_file:
                 exported_files.append(csv_file)
@@ -176,39 +163,37 @@ def create_test_scenarios():
     config = DataConfig()
     exporter = DataExporter()
     
-    # Invalid space station data
     invalid_stations = [
         {
-            "station_id": "TOOLONG123456",  # Too long
+            "station_id": "TOOLONG123456",
             "name": "Test Station",
-            "crew_size": 25,  # Too many crew
+            "crew_size": 25,
             "power_level": 85.0,
             "oxygen_level": 92.0,
             "last_maintenance": "2024-01-15T10:30:00",
             "is_operational": True
         },
         {
-            "station_id": "TS",  # Too short
-            "name": "",  # Empty name
-            "crew_size": 0,  # No crew
-            "power_level": -10.0,  # Negative power
-            "oxygen_level": 150.0,  # Over 100%
+            "station_id": "TS",
+            "name": "",
+            "crew_size": 0,
+            "power_level": -10.0,
+            "oxygen_level": 150.0,
             "last_maintenance": "2024-01-15T10:30:00",
             "is_operational": True
         }
     ]
     
-    # Invalid alien contacts
     invalid_contacts = [
         {
-            "contact_id": "WRONG_FORMAT",  # Doesn't start with AC
+            "contact_id": "WRONG_FORMAT",
             "timestamp": "2024-01-15T14:30:00",
             "location": "Area 51",
             "contact_type": "radio",
             "signal_strength": 8.5,
             "duration_minutes": 45,
             "witness_count": 5,
-            "message_received": None,  # Strong signal without message
+            "message_received": None,
             "is_verified": False
         },
         {
@@ -218,13 +203,12 @@ def create_test_scenarios():
             "contact_type": "telepathic",
             "signal_strength": 6.2,
             "duration_minutes": 30,
-            "witness_count": 1,  # Too few witnesses for telepathic
+            "witness_count": 1,
             "message_received": None,
             "is_verified": False
         }
     ]
     
-    # Export test scenarios
     exporter.export_to_json(invalid_stations, "invalid_stations")
     exporter.export_to_json(invalid_contacts, "invalid_contacts")
     

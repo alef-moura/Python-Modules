@@ -33,7 +33,6 @@ def transform(content: str) -> str:
 def save_file(filename: str, content: str) -> None:
     print(f"Saving data to '{filename}'")
     try:
-        # modo "w": cria o arquivo ou substitui o existente
         file: typing.IO[str] = open(filename, "w")
     except OSError as error:
         print(f"Error opening file '{filename}': {error}")

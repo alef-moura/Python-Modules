@@ -23,7 +23,6 @@ def load_config() -> tuple[dict[str, str | None], list[str]]:
         print("WARNING: python-dotenv is not installed "
               "(pip install -r ex1/requirements.txt)")
     elif os.path.exists(env_file):
-        # override=False: variaveis ja definidas no ambiente tem prioridade
         load_dotenv(env_file, override=False)
     else:
         print("WARNING: no .env file found (cp ex1/.env.example ex1/.env)")
@@ -40,7 +39,6 @@ def load_config() -> tuple[dict[str, str | None], list[str]]:
 
 
 def mask(secret: str) -> str:
-    # Nunca mostramos um segredo inteiro na tela
     return secret[:2] + "*" * max(0, len(secret) - 2)
 
 

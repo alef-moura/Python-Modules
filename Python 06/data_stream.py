@@ -24,7 +24,6 @@ class DataProcessor(ABC):
         self._rank += 1
 
     def output(self) -> tuple[int, str]:
-        # Fila (FIFO): o primeiro a entrar e o primeiro a sair
         if not self._storage:
             raise IndexError(f"{self.name}: no data to output")
         return self._storage.pop(0)
@@ -37,7 +36,6 @@ class DataProcessor(ABC):
 
 
 def _is_number(value: Any) -> bool:
-    # bool e subclasse de int em Python, por isso excluimos explicitamente
     return isinstance(value, (int, float)) and not isinstance(value, bool)
 
 
@@ -109,8 +107,6 @@ class DataStream:
 
     def process_stream(self, stream: list[Any]) -> None:
         for element in stream:
-            # Polimorfismo: o stream nao sabe QUAL processador e,
-            # so pergunta "voce aceita?" e chama ingest.
             for proc in self._processors:
                 if proc.validate(element):
                     try:

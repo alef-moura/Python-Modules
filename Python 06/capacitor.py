@@ -5,7 +5,6 @@ from ex3 import Creature, TransformCapability, TransformCreatureFactory
 def exercise(creature: Creature) -> None:
     print(creature.describe())
     print(creature.attack())
-    # isinstance verifica a CAPACIDADE, nao a familia concreta
     if isinstance(creature, TransformCapability):
         print(creature.transform())
         print(creature.attack())
